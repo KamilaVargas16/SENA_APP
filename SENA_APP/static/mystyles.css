@@ -1,0 +1,11 @@
+/* estilos personalizados de SENA APP */
+body {
+  background-color: #f8f9fa;
+}
+.navbar-brand strong {
+  color: #fff;
+}
+/* Ajustes menores para el layout */
+.container {
+  max-width: 1100px;
+}

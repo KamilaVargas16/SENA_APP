@@ -1,0 +1,71 @@
+{% extends "master.html" %}
+
+{% block title %}Detalles Aprendiz - SENA APP{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Breadcrumb y Navegación -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="back-link">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'aprendices:lista_aprendices' %}" class="back-link">Lista Aprendices</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ aprendiz.firstname }} {{ aprendiz.lastname }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Información Principal del Aprendiz -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex align-items-center">
+                    <i class="bi bi-person-workspace me-2"></i>
+                    <h4 class="mb-0">Perfil del Aprendiz</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="instructor-avatar mb-3">
+                                {{ aprendiz.firstname|slice:":1" }}{{ aprendiz.lastname|slice:":1" }}
+                            </div>
+                            <h4 class="text-primary">{{ aprendiz.firstname }} {{ aprendiz.lastname }}</h4>
+                            <div class="mb-3">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="info-item">
+                                        <h6 class="text-muted mb-2">
+                                            <i class="bi bi-card-text me-2"></i><strong>Información Personal</strong>
+                                        </h6>
+                                        <p class="mb-0"><b>Documento identidad:</b> {{ aprendiz.document }}</p>
+                                        <p class="mb-0"><b>Nombre:</b> {{ aprendiz.firstname }}</p>
+                                        <p class="mb-0"><b>Apellido:</b> {{ aprendiz.lastname }}</p>
+                                        <p class="mb-0"><b>Fecha Nacimiento:</b> {{ aprendiz.birthdate|date:"d/m/Y" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="info-item">
+                                        <h6 class="text-muted mb-2">
+                                            <i class="bi bi-envelope me-2"></i><strong>Información de Contacto</strong>
+                                        </h6>
+                                        <p class="mb-0"><b>Correo:</b> <a href="mailto:{{ aprendiz.email }}">{{ aprendiz.email }}</a></p>
+                                        <p class="mb-0"><b>Telefono:</b> {{ aprendiz.phone }}</p>
+                                        <p class="mb-0"><b>Ciudad:</b> {{ aprendiz.city }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

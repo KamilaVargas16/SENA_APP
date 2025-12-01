@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+
+{% block title %}Inicio - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-success text-white p-5 rounded">
+            <h1 class="display-4">Bienvenido a SENA APP</h1>
+            <p class="lead">Sistema de Gestión de Aprendices del Servicio Nacional de Aprendizaje</p>
+            <hr class="my-4">
+            <p>Administra y consulta la información de los aprendices e instructores de manera eficiente.</p>
+            <a class="btn btn-light btn-lg" href="{% url 'aprendices:lista_aprendices' %}" role="button">
+                Ver Aprendices
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Aprendices</h5>
+                <p class="card-text">Consulta todos los aprendices registrados en el sistema.</p>
+                <p class="card-text">Total de Aprendices: {{ total_aprendices}}</p>
+                <a href="{% url 'aprendices:lista_aprendices' %}" class="btn btn-success">Ver Lista</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
