@@ -1,0 +1,86 @@
+{% extends "master.html" %}
+
+{% block title %}Detalles Instructor - SENA APP{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-2">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-light p-2 rounded shadow-sm">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'instructores:lista_instructores' %}" class="text-decoration-none text-muted">Lista Instructores</a>
+                    </li>
+                    <li class="breadcrumb-item active text-sena fw-bold" aria-current="page">{{ instructor.nombre }} {{ instructor.apellido }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-lg border-sena border-3">
+                <div class="card-header bg-sena text-white d-flex align-items-center">
+                    <i class="bi bi-person-workspace fs-5 me-2"></i>
+                    <h4 class="mb-0 fw-light">Perfil Detallado del Instructor</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center border-end p-4">
+                            <div class="bg-success bg-opacity-10 text-sena d-inline-flex justify-content-center align-items-center rounded-circle mb-3 border border-sena" style="width: 120px; height: 120px; font-size: 3rem; font-weight: bold;">
+                                {{ instructor.nombre|slice:":1" }}{{ instructor.apellido|slice:":1" }}
+                            </div>
+                            <h4 class="text-sena fw-bold">{{ instructor.nombre }} {{ instructor.apellido }}</h4>
+                            <p class="text-muted"><i class="bi bi-star-fill me-1"></i>Instructor SENA</p>
+                            <span class="badge rounded-pill bg-success mt-2">{{ instructor.especialidad }}</span>
+                        </div>
+                        <div class="col-md-9 p-4">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-person-vcard-fill me-2"></i> Información Personal
+                                        </h6>
+                                        <p class="mb-2"><span class="fw-bold">Documento:</span> <span class="fw-semibold text-dark">{{ instructor.documento_id }}</span></p>
+                                        <p class="mb-2"><span class="fw-bold">Tipo Doc:</span> {{ instructor.get_tipo_documento_display }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Fecha Nacimiento:</span> {{ instructor.fecha_nacimiento|date:"d/m/Y" }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Ciudad:</span> {{ instructor.ciudad }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-envelope-open-fill me-2"></i> Contacto y Dirección
+                                        </h6>
+                                        <p class="mb-2"><span class="fw-bold">Correo:</span> <a href="mailto:{{ instructor.correo }}" class="text-decoration-none text-success fw-semibold">{{ instructor.correo|default_if_none:"N/A" }}</a></p>
+                                        <p class="mb-2"><span class="fw-bold">Teléfono:</span> {{ instructor.telefono|default_if_none:"N/A" }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Dirección:</span> {{ instructor.direccion|default_if_none:"N/A" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-mortarboard-fill me-2"></i> Información Profesional
+                                        </h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="mb-2"><span class="fw-bold">Especialidad:</span> <span class="badge bg-success fw-semibold">{{ instructor.especialidad }}</span></p>
+                                                <p class="mb-2"><span class="fw-bold">Nivel Educativo:</span> {{ instructor.get_nivel_educativo_display }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="mb-2"><span class="fw-bold">Años Experiencia:</span> {{ instructor.anos_experiencia }}</p>
+                                                <p class="mb-2"><span class="fw-bold">Vinculación:</span> {{ instructor.fecha_vinculacion|date:"d/m/Y" }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

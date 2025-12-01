@@ -1,0 +1,82 @@
+{% extends "master.html" %}
+
+{% block title %}Lista de Instructores SENA - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-sena"><i class="bi bi-person-video2 me-2"></i> Lista de Instructores SENA</h2>
+            <a href="{% url 'admin:instructores_instructor_add' %}" class="btn btn-sena text-white fw-bold shadow-sm">
+                <i class="bi bi-plus-circle-fill me-1"></i> Nuevo Instructor
+            </a>
+        </div>
+    </div>
+</div>
+
+{% if lista_instructores %}
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="bg-sena text-white">
+                            <tr class="text-uppercase small">
+                                <th scope="col">Documento</th>
+                                <th scope="col">Nombre Completo</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Ciudad</th>
+                                <th scope="col">Especialidad</th>
+                                <th scope="col">Vinculación</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for instructor in lista_instructores %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'instructores:detalle_instructor' instructor.id %}" class="text-sena fw-bold text-decoration-none">{{ instructor.documento_id }}</a>
+                                </td>
+                                <td class="fw-semibold">{{ instructor.nombre }} {{ instructor.apellido }}</td>
+                                <td>
+                                    <a href="mailto:{{ instructor.correo }}" class="text-decoration-none text-sena">{{ instructor.correo }}</a>
+                                </td>
+                                <td>{{ instructor.telefono|default_if_none:"N/A" }}</td>
+                                <td><span class="badge bg-light text-secondary border">{{ instructor.ciudad }}</span></td>
+                                <td>
+                                    <span class="badge bg-success bg-opacity-10 text-success fw-semibold border border-success">{{ instructor.especialidad }}</span>
+                                </td>
+                                <td>{{ instructor.fecha_vinculacion|date:"d/m/Y" }}</td>
+                                <td>
+                                    <a href="{% url 'instructores:detalle_instructor' instructor.id %}" class="btn btn-sm btn-sena text-white shadow-sm">
+                                        <i class="bi bi-eye-fill me-1"></i> Ver
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-success border-start border-5 border-sena shadow-sm p-4" role="alert">
+            <h4 class="alert-heading text-sena"><i class="bi bi-info-circle-fill me-2"></i> **No hay instructores registrados**</h4>
+            <p>Aún no se han registrado instructores en el sistema.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="{% url 'admin:instructores_instructor_add' %}" class="btn btn-sena fw-bold">
+                    <i class="bi bi-person-plus-fill me-1"></i> Registrar Primer Instructor
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
