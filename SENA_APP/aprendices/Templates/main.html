@@ -66,6 +66,30 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card border-sena border-3 shadow h-100 transition-shadow">
+            <div class="card-header bg-sena text-white py-3 fw-bold fs-5 d-flex align-items-center">
+                <i class="bi bi-book-fill me-2"></i> Módulo de Programas
+            </div>
+            <div class="card-body text-center">
+                <i class="bi bi-mortarboard-fill text-sena display-3 mb-3"></i>
+                <h5 class="card-title text-dark fw-bold mb-3">Estadísticas Rápidas</h5>
+                <p class="card-text text-muted mb-4">
+                    Visualiza el número total de programas de formación registrados en el sistema.
+                </p>
+                <p class="card-text">
+                    <span class="text-muted fw-semibold d-block mb-1">Total de Registros:</span>
+                    <span class="badge bg-sena fw-bold fs-4 px-4 py-2">{{ total_programas }}</span>
+                </p>
+            </div>
+            <div class="card-footer bg-light border-0">
+                <a href="{% url 'programas:lista_programa' %}" class="btn btn-outline-success w-100 fw-bold">
+                    Acceder a la Lista <i class="bi bi-arrow-right-circle-fill ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     
     <div class="col-md-6 col-lg-4 mb-4">
         <div class="card border-dark border-3 shadow h-100 transition-shadow">
