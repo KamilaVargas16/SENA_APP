@@ -21,32 +21,36 @@
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover mb-0">
-                        <thead class="bg-sena text-white">
-                            <tr class="text-uppercase small">
-                                <th scope="col">Documento</th>
-                                <th scope="col">Nombre Completo</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Programa</th>
-                                <th scope="col">Fecha Nacimiento</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
+                                <thead class="bg-sena text-white">
+                                    <tr class="text-uppercase small">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Documento</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">Ciudad</th>
+                                        <th scope="col">Programa</th>
+                                        <th scope="col">Fecha Nacimiento</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
                         <tbody>
                             {% for aprendiz in lista_aprendices %}
                             <tr>
+                                <td class="fw-semibold">{{ aprendiz.id }}</td>
                                 <td>
                                     <a href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}" class="text-sena fw-bold text-decoration-none">{{ aprendiz.document }}</a>
                                 </td>
-                                <td class="fw-semibold">{{ aprendiz.firstname }} {{ aprendiz.lastname }}</td>
+                                <td>{{ aprendiz.firstname }}</td>
+                                <td>{{ aprendiz.lastname }}</td>
                                 <td>
                                     <a href="mailto:{{ aprendiz.email }}" class="text-decoration-none">{{ aprendiz.email }}</a>
                                 </td>
-                                <td>{{ aprendiz.phone }}</td>
-                                <td><span class="badge bg-light text-secondary border">{{ aprendiz.city }}</span></td>
+                                <td>{{ aprendiz.phone|default_if_none:"N/A" }}</td>
+                                <td><span class="badge bg-light text-secondary border">{{ aprendiz.city|default_if_none:"N/A" }}</span></td>
                                 <td>
-                                    <span class="badge bg-success bg-opacity-10 text-success fw-semibold border border-success">{{ aprendiz.program }}</span>
+                                    <span class="badge bg-success bg-opacity-10 text-success fw-semibold border border-success">{{ aprendiz.program|default_if_none:"N/A" }}</span>
                                 </td>
                                 <td>{{ aprendiz.birthdate|date:"d/m/Y" }}</td>
                                 <td>

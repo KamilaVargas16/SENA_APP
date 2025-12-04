@@ -1,0 +1,129 @@
+{% extends "master.html" %}
+
+{% block title %}Detalles Curso - SENA APP{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-2">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-light p-2 rounded shadow-sm">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'cursos:lista_cursos' %}" class="text-decoration-none text-muted">Lista Cursos</a>
+                    </li>
+                    <li class="breadcrumb-item active text-sena fw-bold" aria-current="page">{{ curso.codigo }} - {{ curso.nombre }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-lg border-sena border-3">
+                <div class="card-header bg-sena text-white d-flex align-items-center">
+                    <i class="bi bi-book-half fs-5 me-2"></i>
+                    <h4 class="mb-0 fw-light">Detalles del Curso: {{ curso.codigo }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center border-end p-4">
+                            <i class="bi bi-bookmark-check-fill text-sena mb-3" style="font-size: 5rem;"></i>
+                            <h4 class="text-sena fw-bold">{{ curso.nombre }}</h4>
+                            <p class="text-muted"><i class="bi bi-hash me-1"></i>Código:{{ curso.codigo }}</p>
+                            {% if curso.estado == 'PRO' %}
+                                <span class="badge rounded-pill bg-warning text-dark mt-2">{{ curso.get_estado_display }}</span>
+                            {% elif curso.estado == 'INI' or curso.estado == 'EJE' %}
+                                <span class="badge rounded-pill bg-success mt-2">{{ curso.get_estado_display }}</span>
+                            {% elif curso.estado == 'FIN' %}
+                                <span class="badge rounded-pill bg-primary mt-2">{{ curso.get_estado_display }}</span>
+                            {% else %}
+                                <span class="badge rounded-pill bg-danger mt-2">{{ curso.get_estado_display }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9 p-4">
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-info-circle-fill me-2"></i> Información General
+                                        </h6>
+                                        <p class="mb-2"><span class="fw-bold">Programa de Formación:</span> <span class="fw-semibold text-dark">{{ curso.programa.nombre }}</span></p>
+                                        <p class="mb-2"><span class="fw-bold">Instructor Coordinador:</span> <a href="{% url 'instructores:detalle_instructor' curso.instructor_coordinador.id %}" class="text-decoration-none text-success fw-semibold">{{ curso.instructor_coordinador.nombre }} {{ curso.instructor_coordinador.apellido }}</a></p>
+                                        <p class="mb-2"><span class="fw-bold">Fecha de Registro:</span> {{ curso.fecha_registro|date:"d/m/Y h:i A" }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-calendar-range-fill me-2"></i> Fechas y Horario
+                                        </h6>
+                                        <p class="mb-2"><span class="fw-bold">Inicio:</span> <span class="fw-semibold text-success">{{ curso.fecha_inicio|date:"d/m/Y" }}</span></p>
+                                        <p class="mb-2"><span class="fw-bold">Fin:</span> <span class="fw-semibold text-danger">{{ curso.fecha_fin|date:"d/m/Y" }}</span></p>
+                                        <p class="mb-2"><span class="fw-bold">Horario:</span> {{ curso.horario }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Ambiente:</span> <span class="badge bg-secondary fw-semibold">{{ curso.aula }}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-people-fill me-2"></i> Cupos y Ocupación
+                                        </h6>
+                                        <p class="mb-2"><span class="fw-bold">Cupos Máximos:</span> {{ curso.cupos_maximos }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Aprendices Inscritos:</span> {{ curso.aprendices.count }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Cupos Disponibles:</span> {{ curso.cupos_disponibles }}</p>
+                                        <p class="mb-2"><span class="fw-bold">Porcentaje de Ocupación:</span> {{ curso.porcentaje_ocupacion|floatformat:2 }}%</p>
+                                        <div class="progress mt-3">
+                                            <div class="progress-bar bg-sena" role="progressbar" style="width: {{ curso.porcentaje_ocupacion }}%;" aria-valuenow="{{ curso.porcentaje_ocupacion|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">
+                                                {{ curso.porcentaje_ocupacion|floatformat:0 }}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if curso.observaciones %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="p-3 bg-light rounded-3 h-100 border-start border-sena border-4">
+                                        <h6 class="text-sena border-bottom border-success pb-2 mb-3 fw-bold">
+                                            <i class="bi bi-chat-left-text-fill me-2"></i> Observaciones
+                                        </h6>
+                                        <p class="text-muted fst-italic">{{ curso.observaciones }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="row mt-4">
+                                <div class="col-lg-12">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header bg-success text-white fw-bold">
+                                            <i class="bi bi-person-workspace me-2"></i> Instructores Adicionales Asignados
+                                        </div>
+                                        <div class="list-group list-group-flush">
+                                            {% for asignacion in curso.instructorcurso_set.all %}
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span>
+                                                    <a href="{% url 'instructores:detalle_instructor' asignacion.instructor.id %}" class="text-decoration-none text-dark fw-semibold">
+                                                        {{ asignacion.instructor.nombre }} {{ asignacion.instructor.apellido }}
+                                                    </a>
+                                                    <span class="badge bg-secondary ms-2">{{ asignacion.rol }}</span>
+                                                </span>
+                                                <small class="text-muted">Asignado: {{ asignacion.fecha_asignacion|date:"d/m/Y" }}</small>
+                                            </div>
+                                            {% empty %}
+                                            <div class="list-group-item text-center text-muted">No hay instructores adicionales asignados a este curso.</div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
