@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-sena"><i class="bi bi-book-fill me-2"></i> Gestión de Programas de Formación</h2>
-            <a href="{% url 'admin:programas_programa_add' %}" class="btn btn-sena text-white fw-bold shadow-sm">
+            <a href="{% url 'programas:crear_programa' %}" class="btn btn-sena text-white fw-bold shadow-sm">
                 <i class="bi bi-plus-circle-fill me-1"></i> Nuevo Programa
             </a>
         </div>
@@ -54,9 +54,26 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{% url 'programas:detalle_programa' programa.id %}" class="btn btn-sm btn-sena">
-                                        <i class="bi bi-eye-fill"></i> Ver Detalles
-                                    </a>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'programas:detalle_programa' programa.id %}" class="btn btn-sm btn-sena">
+                                            <i class="bi bi-eye-fill"></i> Ver Detalles
+                                        </a>
+                                        <!-- Botón Editar -->
+                                        <a href="{% url 'programas:editar_programa' programa.id %}" 
+                                           class="btn btn-sm btn-outline-primary" 
+                                           title="Editar programa"
+                                           data-bs-toggle="tooltip">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        
+                                        <!-- Botón Eliminar -->
+                                        <a href="{% url 'programas:eliminar_programa' programa.id %}" 
+                                           class="btn btn-sm btn-outline-danger" 
+                                           title="Eliminar programa"
+                                           data-bs-toggle="tooltip">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -75,7 +92,7 @@
             <p>Aún no se han registrado programas de formación en el sistema. Utiliza el siguiente botón para agregar el primero.</p>
             <hr>
             <p class="mb-0">
-                <a href="{% url 'admin:programas_programa_add' %}" class="btn btn-sena fw-bold">
+                <a href="{% url 'programas:crear_programa' %}" class="btn btn-sena fw-bold">
                     <i class="bi bi-book-half me-1"></i> Registrar Primer Programa
                 </a>
             </p>

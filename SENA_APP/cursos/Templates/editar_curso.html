@@ -1,0 +1,157 @@
+{% extends 'master.html' %}
+
+{% block title %}Editar Curso - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-pencil-square"></i> Editar Curso
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Por favor corrija los siguientes errores:</strong>
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Información Básica -->
+                    <h5 class="mb-3 text-primary"><i class="bi bi-info-circle"></i> Información Básica</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.codigo.label }} <span class="text-danger">*</span></label>
+                            {{ form.codigo }}
+                            {% if form.codigo.errors %}
+                                <div class="text-danger">{{ form.codigo.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label">{{ form.nombre.label }} <span class="text-danger">*</span></label>
+                            {{ form.nombre }}
+                            {% if form.nombre.errors %}
+                                <div class="text-danger">{{ form.nombre.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.programa.label }} <span class="text-danger">*</span></label>
+                            {{ form.programa }}
+                            {% if form.programa.errors %}
+                                <div class="text-danger">{{ form.programa.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.instructor_coordinador.label }} <span class="text-danger">*</span></label>
+                            {{ form.instructor_coordinador }}
+                            {% if form.instructor_coordinador.errors %}
+                                <div class="text-danger">{{ form.instructor_coordinador.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Fechas y Horario -->
+                    <h5 class="mb-3 mt-4 text-primary"><i class="bi bi-calendar-event"></i> Fechas y Horario</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.fecha_inicio.label }} <span class="text-danger">*</span></label>
+                            {{ form.fecha_inicio }}
+                            {% if form.fecha_inicio.errors %}
+                                <div class="text-danger">{{ form.fecha_inicio.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.fecha_fin.label }} <span class="text-danger">*</span></label>
+                            {{ form.fecha_fin }}
+                            {% if form.fecha_fin.errors %}
+                                <div class="text-danger">{{ form.fecha_fin.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.estado.label }} <span class="text-danger">*</span></label>
+                            {{ form.estado }}
+                            {% if form.estado.errors %}
+                                <div class="text-danger">{{ form.estado.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.horario.label }} <span class="text-danger">*</span></label>
+                            {{ form.horario }}
+                            {% if form.horario.errors %}
+                                <div class="text-danger">{{ form.horario.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Ubicación y Cupos -->
+                    <h5 class="mb-3 mt-4 text-primary"><i class="bi bi-geo-alt"></i> Ubicación y Cupos</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.aula.label }} <span class="text-danger">*</span></label>
+                            {{ form.aula }}
+                            {% if form.aula.errors %}
+                                <div class="text-danger">{{ form.aula.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.cupos_maximos.label }} <span class="text-danger">*</span></label>
+                            {{ form.cupos_maximos }}
+                            {% if form.cupos_maximos.errors %}
+                                <div class="text-danger">{{ form.cupos_maximos.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.observaciones.label }}</label>
+                            {{ form.observaciones }}
+                            {% if form.observaciones.errors %}
+                                <div class="text-danger">{{ form.observaciones.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'cursos:lista_cursos' %}" class="btn btn-secondary me-md-2">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-warning text-dark">
+                            <i class="bi bi-save"></i> Actualizar Curso
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="bi bi-info-circle"></i> 
+                Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

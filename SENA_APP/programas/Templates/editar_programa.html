@@ -1,0 +1,187 @@
+{% extends 'master.html' %}
+
+{% block title %}Editar Programa - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-pencil-square"></i> Editar Programa de Formación
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Por favor corrija los siguientes errores:</strong>
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Información Básica -->
+                    <h5 class="mb-3 text-primary"><i class="bi bi-info-circle"></i> Información Básica</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.codigo.label }} <span class="text-danger">*</span></label>
+                            {{ form.codigo }}
+                            {% if form.codigo.errors %}
+                                <div class="text-danger">{{ form.codigo.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-8 mb-3">
+                            <label class="form-label">{{ form.nombre.label }} <span class="text-danger">*</span></label>
+                            {{ form.nombre }}
+                            {% if form.nombre.errors %}
+                                <div class="text-danger">{{ form.nombre.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.nivel_formacion.label }} <span class="text-danger">*</span></label>
+                            {{ form.nivel_formacion }}
+                            {% if form.nivel_formacion.errors %}
+                                <div class="text-danger">{{ form.nivel_formacion.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.modalidad.label }} <span class="text-danger">*</span></label>
+                            {{ form.modalidad }}
+                            {% if form.modalidad.errors %}
+                                <div class="text-danger">{{ form.modalidad.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.estado.label }} <span class="text-danger">*</span></label>
+                            {{ form.estado }}
+                            {% if form.estado.errors %}
+                                <div class="text-danger">{{ form.estado.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Duración -->
+                    <h5 class="mb-3 mt-4 text-primary"><i class="bi bi-clock"></i> Duración del Programa</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.duracion_meses.label }} <span class="text-danger">*</span></label>
+                            {{ form.duracion_meses }}
+                            {% if form.duracion_meses.errors %}
+                                <div class="text-danger">{{ form.duracion_meses.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.duracion_horas.label }} <span class="text-danger">*</span></label>
+                            {{ form.duracion_horas }}
+                            {% if form.duracion_horas.errors %}
+                                <div class="text-danger">{{ form.duracion_horas.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">{{ form.fecha_creacion.label }} <span class="text-danger">*</span></label>
+                            {{ form.fecha_creacion }}
+                            {% if form.fecha_creacion.errors %}
+                                <div class="text-danger">{{ form.fecha_creacion.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Ubicación -->
+                    <h5 class="mb-3 mt-4 text-primary"><i class="bi bi-geo-alt"></i> Ubicación</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.centro_formacion.label }} <span class="text-danger">*</span></label>
+                            {{ form.centro_formacion }}
+                            {% if form.centro_formacion.errors %}
+                                <div class="text-danger">{{ form.centro_formacion.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ form.regional.label }} <span class="text-danger">*</span></label>
+                            {{ form.regional }}
+                            {% if form.regional.errors %}
+                                <div class="text-danger">{{ form.regional.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Descripción -->
+                    <h5 class="mb-3 mt-4 text-primary"><i class="bi bi-card-text"></i> Descripción del Programa</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.descripcion.label }} <span class="text-danger">*</span></label>
+                            {{ form.descripcion }}
+                            {% if form.descripcion.errors %}
+                                <div class="text-danger">{{ form.descripcion.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.competencias.label }} <span class="text-danger">*</span></label>
+                            {{ form.competencias }}
+                            {% if form.competencias.errors %}
+                                <div class="text-danger">{{ form.competencias.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.perfil_egreso.label }} <span class="text-danger">*</span></label>
+                            {{ form.perfil_egreso }}
+                            {% if form.perfil_egreso.errors %}
+                                <div class="text-danger">{{ form.perfil_egreso.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ form.requisitos_ingreso.label }} <span class="text-danger">*</span></label>
+                            {{ form.requisitos_ingreso }}
+                            {% if form.requisitos_ingreso.errors %}
+                                <div class="text-danger">{{ form.requisitos_ingreso.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'programas:lista_programa' %}" class="btn btn-secondary me-md-2">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-warning text-dark">
+                            <i class="bi bi-save"></i> Actualizar Programa
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="bi bi-info-circle"></i> 
+                Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

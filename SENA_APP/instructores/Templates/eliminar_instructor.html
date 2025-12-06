@@ -1,0 +1,74 @@
+{% extends 'master.html' %}
+
+{% block title %}Eliminar Instructor - SENA APP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-exclamation-triangle"></i> Confirmar Eliminación
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <strong>¡Atención!</strong> Esta acción no se puede deshacer.
+                </div>
+                
+                <p class="lead">¿Está seguro que desea eliminar al siguiente instructor?</p>
+                
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ instructor.nombre_completo }}</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-card-text"></i> Documento:</strong><br>
+                                    {{ instructor.get_tipo_documento_display }} - {{ instructor.documento_id }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-envelope"></i> Correo:</strong><br>
+                                    {{ instructor.correo|default:"No registrado" }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-telephone"></i> Teléfono:</strong><br>
+                                    {{ instructor.telefono|default:"No registrado" }}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-geo-alt"></i> Ciudad:</strong><br>
+                                    {{ instructor.ciudad|default:"No registrada" }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-mortarboard"></i> Especialidad:</strong><br>
+                                    {{ instructor.especialidad }}
+                                </p>
+                                <p class="mb-2">
+                                    <strong><i class="bi bi-calendar-check"></i> Experiencia:</strong><br>
+                                    {{ instructor.anos_experiencia }} años
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-secondary me-md-2">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Sí, Eliminar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

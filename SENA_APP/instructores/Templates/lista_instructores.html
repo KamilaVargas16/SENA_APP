@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-sena"><i class="bi bi-person-video2 me-2"></i> Lista de Instructores SENA</h2>
-            <a href="{% url 'admin:instructores_instructor_add' %}" class="btn btn-sena text-white fw-bold shadow-sm">
+            <a href="{% url 'instructores:crear_instructor' %}" class="btn btn-sena text-white fw-bold shadow-sm">
                 <i class="bi bi-plus-circle-fill me-1"></i> Nuevo Instructor
             </a>
         </div>
@@ -53,6 +53,21 @@
                                     <a href="{% url 'instructores:detalle_instructor' instructor.id %}" class="btn btn-sm btn-sena text-white shadow-sm">
                                         <i class="bi bi-eye-fill me-1"></i> Ver
                                     </a>
+                                    <!-- Botón Editar -->
+                                    <a href="{% url 'instructores:editar_instructor' instructor.id %}" 
+                                       class="btn btn-sm btn-outline-primary me-2" 
+                                       title="Editar instructor"
+                                       data-bs-toggle="tooltip">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    
+                                    <!-- Botón Eliminar -->
+                                    <a href="{% url 'instructores:eliminar_instructor' instructor.id %}" 
+                                       class="btn btn-sm btn-outline-danger" 
+                                       title="Eliminar instructor"
+                                       data-bs-toggle="tooltip">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -67,7 +82,7 @@
 <div class="row">
     <div class="col-12">
         <div class="alert alert-success border-start border-5 border-sena shadow-sm p-4" role="alert">
-            <h4 class="alert-heading text-sena"><i class="bi bi-info-circle-fill me-2"></i> **No hay instructores registrados**</h4>
+            <h4 class="alert-heading text-sena"><i class="bi bi-info-circle-fill me-2"></i> No hay instructores registrados</h4>
             <p>Aún no se han registrado instructores en el sistema.</p>
             <hr>
             <p class="mb-0">

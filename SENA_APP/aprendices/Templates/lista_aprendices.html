@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-sena"><i class="bi bi-people-fill me-2"></i> Gestión de Aprendices SENA</h2>
-            <a href="{% url 'admin:aprendices_aprendiz_add' %}" class="btn btn-sena text-white fw-bold shadow-sm">
+            <a href="{% url 'aprendices:crear_aprendiz' %}" class="btn btn-sena text-white fw-bold shadow-sm">
                 <i class="bi bi-plus-circle-fill me-1"></i> Nuevo Aprendiz
             </a>
         </div>
@@ -57,6 +57,21 @@
                                     <a href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}" class="btn btn-sm btn-sena">
                                         <i class="bi bi-eye-fill"></i> Ver Detalles
                                     </a>
+                            <!-- Botón Editar -->
+                            <a href="{% url 'aprendices:editar_aprendiz' aprendiz.id %}" 
+                               class="btn btn-sm btn-outline-primary me-2" 
+                               title="Editar aprendiz"
+                               data-bs-toggle="tooltip">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                            
+                            <!-- Botón Eliminar -->
+                            <a href="{% url 'aprendices:eliminar_aprendiz' aprendiz.id %}" 
+                               class="btn btn-sm btn-outline-danger" 
+                               title="Eliminar aprendiz"
+                               data-bs-toggle="tooltip">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -75,7 +90,7 @@
             <p>Aún no se han registrado aprendices en el sistema. Utiliza el siguiente botón para agregar el primero.</p>
             <hr>
             <p class="mb-0">
-                <a href="{% url 'admin:aprendices_aprendiz_add' %}" class="btn btn-sena fw-bold">
+                <a href="{% url 'aprendices:crear_aprendiz' %}" class="btn btn-sena fw-bold">
                     <i class="bi bi-person-plus-fill me-1"></i> Registrar Primer Aprendiz
                 </a>
             </p>
