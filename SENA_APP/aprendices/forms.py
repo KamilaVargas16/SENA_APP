@@ -17,7 +17,6 @@ class AprendizForm(forms.ModelForm):
             'city',
             'program'
         ]
-        # Widgets personalizados para mejorar la interfaz en el HTML
         widgets = {
             'document': forms.TextInput(attrs={
                 'class': 'form-control',
